@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "carbon-intensity-sdk", "src\carbon-intensity-sdk.csproj", "{C15B8D77-3881-4FEC-9672-F08D555061C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "carbon-intensity-sdk", "src\carbon-intensity-sdk\carbon-intensity-sdk.csproj", "{C15B8D77-3881-4FEC-9672-F08D555061C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "carbon-intensity-sdk.test", "tests\carbon-intensity-sdk.test\carbon-intensity-sdk.test.csproj", "{E184E634-3ACA-4C12-9D63-8B4963DC7A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "carbon-intensity-sdk.test", "tests\carbon-intensity-sdk.test\carbon-intensity-sdk.test.csproj", "{E184E634-3ACA-4C12-9D63-8B4963DC7A24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-client", "src\sample-client\sample-client.csproj", "{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E184E634-3ACA-4C12-9D63-8B4963DC7A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E184E634-3ACA-4C12-9D63-8B4963DC7A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E184E634-3ACA-4C12-9D63-8B4963DC7A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\carbon-intensity-sdk.csproj" />
+    <ProjectReference Include="..\..\src\carbon-intensity-sdk\carbon-intensity-sdk.csproj" />
   </ItemGroup>
 
 </Project>
