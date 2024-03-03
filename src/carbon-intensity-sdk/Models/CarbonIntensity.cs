@@ -2,7 +2,7 @@
 
 namespace CarbonIntensitySdk.Models
 {
-    public record Intensity
+    public record CarbonIntensity
     {
         [JsonPropertyName("forecast")]
         public required int Forecast { get; init; }

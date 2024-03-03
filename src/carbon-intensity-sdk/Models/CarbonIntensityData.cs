@@ -2,7 +2,7 @@
 
 namespace CarbonIntensitySdk.Models;
 
-public record IntensityData
+public record CarbonIntensityData
 {
     [JsonPropertyName("from")]
     public required DateTime FromUtc { get; init; }
@@ -11,5 +11,5 @@ public record IntensityData
     public required DateTime ToUtc { get; init; }
 
     [JsonPropertyName("intensity")]
-    public required Intensity Intensity { get; init; }   
+    public required CarbonIntensity Intensity { get; init; }   
 }

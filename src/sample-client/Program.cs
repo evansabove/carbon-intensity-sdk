@@ -18,6 +18,7 @@ namespace sample_client
             var yesterday = await client.GetIntensityForDate(DateTime.Today.AddDays(-1));
             var today = await client.GetIntensityForToday();
             var dateAndPeriod = await client.GetIntensityForDateAndPeriod(DateTime.Today, 11);
+            var factors = await client.GetCarbonFactors();
         }
     }
 }

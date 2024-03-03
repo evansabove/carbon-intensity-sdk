@@ -9,24 +9,24 @@ namespace CarbonIntensitySdk
         /// Get Carbon Intensity data for current half hour
         /// </summary>
         /// <returns><see cref="T:IntensityData"/></returns>
-        public async Task<IntensityData> GetIntensityForCurrentHalfHour()
+        public async Task<CarbonIntensityData> GetIntensityForCurrentHalfHour()
         {
-            var data = await facade.CallApi("intensity");
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>("intensity");
 
             AssertHasSingleDataEntry(data);
             
-            return data[0];
+            return data.Data[0];
         }
 
         /// <summary>
         /// Get Carbon Intensity data for today
         /// </summary>
         /// <returns><see cref="T:IntensityData[]"/></returns>
-        public async Task<IntensityData[]> GetIntensityForToday()
+        public async Task<CarbonIntensityData[]> GetIntensityForToday()
         {
-            var data = await facade.CallApi("intensity/date");
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>("intensity/date");
 
-            return data;
+            return data.Data;
         }
 
         /// <summary>
@@ -34,11 +34,11 @@ namespace CarbonIntensitySdk
         /// </summary>
         /// <param name="date">Date in YYYY-MM-DD format e.g. 2017-08-25</param>
         /// <returns><see cref="T:IntensityData[]"/></returns>
-        public async Task<IntensityData[]> GetIntensityForDate(DateTime date)
+        public async Task<CarbonIntensityData[]> GetIntensityForDate(DateTime date)
         {
-            var data = await facade.CallApi($"intensity/date/{date:yyyy-MM-dd}");
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}");
 
-            return data;
+            return data.Data;
         }
 
         /// <summary>
@@ -47,24 +47,33 @@ namespace CarbonIntensitySdk
         /// <param name="date">Date in YYYY-MM-DD format e.g. 2017-08-25</param>
         /// <param name="period">Half hour settlement period between 1-48 e.g. 42</param>
         /// <returns><see cref="T:IntensityData"/></returns>
-        public async Task<IntensityData[]> GetIntensityForDateAndPeriod(DateTime date, int period)
+        public async Task<CarbonIntensityData[]> GetIntensityForDateAndPeriod(DateTime date, int period)
         {
-            var data = await facade.CallApi($"intensity/date/{date:yyyy-MM-dd}/{period}");
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}/{period}");
 
             AssertHasSingleDataEntry(data);
 
-            return data;
+            return data.Data;
+        }
+
+        public async Task<CarbonFactors> GetCarbonFactors()
+        {
+            var data = await facade.CallApi<ApiDataResponse<CarbonFactors>>("intensity/factors");
+
+            AssertHasSingleDataEntry(data);
+
+            return data.Data[0];
         }
 
         //extract this into a fluent validator style pattern where we 'validate' the response we've received?
-        private void AssertHasSingleDataEntry(IReadOnlyCollection<IntensityData> data)
+        private void AssertHasSingleDataEntry<T>(ApiDataResponse<T> data)
         {
-            if (data == null || !data.Any())
+            if (!data.Data.Any())
             {
                 throw new UnexpectedApiResponseException("Expected single result but none were found");
             }
 
-            if (data.Count > 1)
+            if (data.Data.Length > 1)
             {
                 throw new UnexpectedApiResponseException("Only 1 result expected but multiple were found");
             }

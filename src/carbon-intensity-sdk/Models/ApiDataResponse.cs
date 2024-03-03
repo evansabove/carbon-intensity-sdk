@@ -2,8 +2,8 @@
 
 namespace CarbonIntensitySdk.Models;
 
-public record IntensityResponse
+public record ApiDataResponse<T>
 {
     [JsonPropertyName("data")]
-    public required IntensityData[] Data { get; init; }
+    public required T[] Data { get; init; }
 }
