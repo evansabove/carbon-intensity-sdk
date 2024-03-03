@@ -23,7 +23,9 @@ namespace sample_client
             //var forward24hFrom = await client.GetIntensity24HForwardsFrom(DateTime.Now);
             //var forward48hFrom = await client.GetIntensity48HForwardsFrom(DateTime.Now);
             //var past24hfrom = await client.GetIntensity24HPastFrom(DateTime.Now);
-            var between = await client.GetIntensityBetween(DateTime.Now, DateTime.Now.AddHours(2));
+            //var between = await client.GetIntensityBetween(DateTime.Now, DateTime.Now.AddHours(2));
+            //var statsBetween = await client.GetIntensityStatsBetween(DateTime.Now, DateTime.Now.AddHours(2));
+            //var averageIntensityBetween = await client.GetBlockAverageIntensityStatsBetween(DateTime.Now, DateTime.Now.AddHours(2), 2);
         }
     }
 }
