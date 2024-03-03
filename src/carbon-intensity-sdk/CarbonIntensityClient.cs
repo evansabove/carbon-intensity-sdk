@@ -56,6 +56,10 @@ namespace CarbonIntensitySdk
             return data.Data;
         }
 
+        /// <summary>
+        /// Get Carbon Intensity factors for each fuel type
+        /// </summary>
+        /// <returns><see cref="T:CarbonFactors"/></returns>
         public async Task<CarbonFactors> GetCarbonFactors()
         {
             var data = await facade.CallApi<ApiDataResponse<CarbonFactors>>("intensity/factors");
@@ -63,6 +67,68 @@ namespace CarbonIntensitySdk
             AssertHasSingleDataEntry(data);
 
             return data.Data[0];
+        }
+
+        /// <summary>
+        /// Get Carbon Intensity data for specific half hour period
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public async Task<CarbonIntensityData> GetIntensityFrom(DateTime from)
+        {
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}");
+
+            AssertHasSingleDataEntry(data);
+
+            return data.Data[0];
+        }
+
+        /// <summary>
+        /// Get Carbon Intensity data 24hrs forwards from specific datetime
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public async Task<CarbonIntensityData[]> GetIntensity24HForwardsFrom(DateTime from)
+        {
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/fw24h");
+
+            return data.Data;
+        }
+
+        /// <summary>
+        /// Get Carbon Intensity data 48hrs forwards from specific datetime
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public async Task<CarbonIntensityData[]> GetIntensity48HForwardsFrom(DateTime from)
+        {
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/fw48h");
+
+            return data.Data;
+        }
+
+        /// <summary>
+        /// Get Carbon Intensity data 24hrs in the past of a specific datetime
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public async Task<CarbonIntensityData[]> GetIntensity24HPastFrom(DateTime from)
+        {
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/pt24h");
+
+            return data.Data;
+        }
+
+        /// <summary>
+        /// Get Carbon Intensity data between from and to datetime
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public async Task<CarbonIntensityData[]> GetIntensityBetween(DateTime from, DateTime to)
+        {
+            var data = await facade.CallApi<ApiDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
+
+            return data.Data;
         }
 
         //extract this into a fluent validator style pattern where we 'validate' the response we've received?
