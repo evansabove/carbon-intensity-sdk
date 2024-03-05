@@ -111,9 +111,9 @@ namespace CarbonIntensitySdk
         /// </summary>
         /// <param name="from"></param>
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
-        public async Task<CarbonIntensityData[]> GetIntensity24HPastFrom(DateTime from)
+        public async Task<CarbonIntensityData[]> GetIntensity24HBefore(DateTime before)
         {
-            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/pt24h");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{before:yyyy-MM-ddTHH:mmZ}/pt24h");
 
             return data.Data;
         }
@@ -172,11 +172,11 @@ namespace CarbonIntensitySdk
         /// <summary>
         /// Get generation mix for the past 24 hours
         /// </summary>
-        /// <param name="from"></param>
+        /// <param name="before"></param>
         /// <returns></returns>
-        public async Task<GenerationMixData[]> GetGenerationMix24HBefore(DateTime from)
+        public async Task<GenerationMixData[]> GetGenerationMix24HBefore(DateTime before)
         {
-            var data = await facade.CallApi<ApiListDataResponse<GenerationMixData>>($"generation/{from:yyyy-MM-ddTHH:mmZ}/pt24h");
+            var data = await facade.CallApi<ApiListDataResponse<GenerationMixData>>($"generation/{before:yyyy-MM-ddTHH:mmZ}/pt24h");
 
             return data.Data;
         }
