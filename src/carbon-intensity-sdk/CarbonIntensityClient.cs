@@ -193,5 +193,16 @@ namespace CarbonIntensitySdk
 
             return data.Data;
         }
+
+        /// <summary>
+        /// Get Carbon Intensity data for current half hour for GB regions
+        /// </summary>
+        /// <returns><see cref="T:RegionalIntensityData"/></returns>
+        public async Task<RegionalIntensityData[]> GetRegionalData()
+        {
+            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>("regional");
+
+            return data.Data;
+        }
     }
 }
