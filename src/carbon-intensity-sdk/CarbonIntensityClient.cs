@@ -10,7 +10,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData"/></returns>
         public async Task<CarbonIntensityData> GetIntensityForCurrentHalfHour()
         {
-            var data = await facade.CallApi<CarbonIntensityData>("intensity");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>("intensity");
 
             data.AssertHasSingleDataEntry();
             
@@ -23,7 +23,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensityForToday()
         {
-            var data = await facade.CallApi<CarbonIntensityData>("intensity/date");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>("intensity/date");
 
             return data.Data;
         }
@@ -35,7 +35,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensityForDate(DateTime date)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/date/{date:yyyy-MM-dd}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}");
 
             return data.Data;
         }
@@ -48,7 +48,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensityForDateAndPeriod(DateTime date, int period)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/date/{date:yyyy-MM-dd}/{period}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}/{period}");
 
             data.AssertHasSingleDataEntry();
 
@@ -61,7 +61,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonFactors"/></returns>
         public async Task<CarbonFactors> GetCarbonFactors()
         {
-            var data = await facade.CallApi<CarbonFactors>("intensity/factors");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonFactors>>("intensity/factors");
 
             data.AssertHasSingleDataEntry();
 
@@ -75,7 +75,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData"/></returns>
         public async Task<CarbonIntensityData> GetIntensityFrom(DateTime from)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/{from:yyyy-MM-ddTHH:mmZ}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}");
 
             data.AssertHasSingleDataEntry();
 
@@ -89,7 +89,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensity24HForwardsFrom(DateTime from)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/fw24h");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/fw24h");
 
             return data.Data;
         }
@@ -101,7 +101,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensity48HForwardsFrom(DateTime from)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/fw48h");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/fw48h");
 
             return data.Data;
         }
@@ -113,7 +113,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensity24HPastFrom(DateTime from)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/pt24h");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/pt24h");
 
             return data.Data;
         }
@@ -126,7 +126,7 @@ namespace CarbonIntensitySdk
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensityBetween(DateTime from, DateTime to)
         {
-            var data = await facade.CallApi<CarbonIntensityData>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
 
             return data.Data;
         }
@@ -136,10 +136,10 @@ namespace CarbonIntensitySdk
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
-        /// <returns></returns>
+        /// <returns><see cref="T:CarbonIntensityStatisticsData[]"/></returns>
         public async Task<CarbonIntensityStatisticsData[]> GetIntensityStatsBetween(DateTime from, DateTime to)
         {
-            var data = await facade.CallApi<CarbonIntensityStatisticsData>($"intensity/stats/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityStatisticsData>>($"intensity/stats/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
 
             return data.Data;
         }
@@ -150,10 +150,46 @@ namespace CarbonIntensitySdk
         /// <param name="from">Start datetime in ISO8601 format YYYY-MM-DDThh:mmZ e.g. '2017-08-25T12:35Z'</param>
         /// <param name="to">End datetime in ISO8601 format YYYY-MM-DDThh:mmZ e.g. '2017-08-26T17:00Z'</param>
         /// <param name="blockLengthHours">Block length in hours i.e. a block length of 2 hrs over a 24 hr period returns 12 items with the average, max, min for each 2 hr block e.g. 2017-08-26T17:00Z/2017-08-27T17:00Z/2</param>
-        /// <returns></returns>
+        /// <returns><see cref="T:CarbonIntensityStatisticsData[]"/></returns>
         public async Task<CarbonIntensityStatisticsData[]> GetBlockAverageIntensityStatsBetween(DateTime from, DateTime to, int blockLengthHours)
         {
-            var data = await facade.CallApi<CarbonIntensityStatisticsData>($"intensity/stats/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/{blockLengthHours}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityStatisticsData>>($"intensity/stats/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/{blockLengthHours}");
+
+            return data.Data;
+        }
+
+        /// <summary>
+        /// Get generation mix for current half hour
+        /// </summary>
+        /// <returns><see cref="T:GenerationMixData"/></returns>
+        public async Task<GenerationMixData> GetGenerationMix()
+        {
+            var data = await facade.CallApi<ApiDataResponse<GenerationMixData>>("generation");
+
+            return data.Data;
+        }
+
+        /// <summary>
+        /// Get generation mix for the past 24 hours
+        /// </summary>
+        /// <param name="from"></param>
+        /// <returns></returns>
+        public async Task<GenerationMixData[]> GetGenerationMix24HBefore(DateTime from)
+        {
+            var data = await facade.CallApi<ApiListDataResponse<GenerationMixData>>($"generation/{from:yyyy-MM-ddTHH:mmZ}/pt24h");
+
+            return data.Data;
+        }
+
+        /// <summary>
+        /// Get generation mix between from and to datetimes
+        /// </summary>
+        /// <param name="from">Start Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z</param>
+        /// <param name="to">End datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z</param>
+        /// <returns><see cref="T:GenerationMixData[]"/></returns>
+        public async Task<GenerationMixData[]> GetGenerationMix(DateTime from, DateTime to)
+        {
+            var data = await facade.CallApi<ApiListDataResponse<GenerationMixData>>($"generation/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
 
             return data.Data;
         }

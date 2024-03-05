@@ -8,11 +8,11 @@ public class CarbonIntensityFacade
 {
     public static Uri BaseUri => new("https://api.carbonintensity.org.uk/");
 
-    public async Task<ApiDataResponse<TResponse>> CallApi<TResponse>(string path)
+    public async Task<TResponse> CallApi<TResponse>(string path)
     {
         try
         {
-            var response = await $"{BaseUri}{path}".GetJsonAsync<ApiDataResponse<TResponse>>();
+            var response = await $"{BaseUri}{path}".GetJsonAsync<TResponse>();
 
             return response;
         }

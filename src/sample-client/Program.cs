@@ -26,6 +26,7 @@ namespace sample_client
             //var between = await client.GetIntensityBetween(DateTime.Now, DateTime.Now.AddHours(2));
             //var statsBetween = await client.GetIntensityStatsBetween(DateTime.Now, DateTime.Now.AddHours(2));
             //var averageIntensityBetween = await client.GetBlockAverageIntensityStatsBetween(DateTime.Now, DateTime.Now.AddHours(2), 2);
+            var generatioMix = await client.GetGenerationMix24HBefore(DateTime.Now.AddDays(-1));
         }
     }
 }
