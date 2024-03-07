@@ -223,5 +223,15 @@ namespace CarbonIntensitySdk
 
             return data.Data[0];
         }
+
+        public async Task<PostcodeIntensityData> GetPostcodeData(string postcode)
+        {
+            var data = await facade.CallApi<ApiListDataResponse<PostcodeIntensityData>>($"regional/postcode/{postcode}");
+
+            data.Data.AssertHasSingleEntry();
+            data.Data[0].Intensities.AssertHasSingleEntry();
+
+            return data.Data[0];
+        }
     }
 }

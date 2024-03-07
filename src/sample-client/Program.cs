@@ -30,7 +30,7 @@ namespace sample_client
 
             //methods should be labelled as Async.
 
-            var regionalData = await client.GetCountryData(Country.Scotland);
+            var regionalData = await client.GetPostcodeData("S8");
         }
     }
 }
