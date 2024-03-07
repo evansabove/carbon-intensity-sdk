@@ -1,4 +1,6 @@
-﻿using CarbonIntensitySdk.Models;
+﻿using CarbonIntensitySdk.Enums;
+using CarbonIntensitySdk.Extensions;
+using CarbonIntensitySdk.Models;
 
 namespace CarbonIntensitySdk
 {
@@ -12,7 +14,7 @@ namespace CarbonIntensitySdk
         {
             var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>("intensity");
 
-            data.AssertHasSingleDataEntry();
+            data.Data.AssertHasSingleEntry();
             
             return data.Data[0];
         }
@@ -50,7 +52,7 @@ namespace CarbonIntensitySdk
         {
             var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}/{period}");
 
-            data.AssertHasSingleDataEntry();
+            data.Data.AssertHasSingleEntry();
 
             return data.Data;
         }
@@ -63,7 +65,7 @@ namespace CarbonIntensitySdk
         {
             var data = await facade.CallApi<ApiListDataResponse<CarbonFactors>>("intensity/factors");
 
-            data.AssertHasSingleDataEntry();
+            data.Data.AssertHasSingleEntry();
 
             return data.Data[0];
         }
@@ -77,7 +79,7 @@ namespace CarbonIntensitySdk
         {
             var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/{from:yyyy-MM-ddTHH:mmZ}");
 
-            data.AssertHasSingleDataEntry();
+            data.Data.AssertHasSingleEntry();
 
             return data.Data[0];
         }
@@ -203,6 +205,23 @@ namespace CarbonIntensitySdk
             var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>("regional");
 
             return data.Data;
+        }
+
+        /// <summary>
+        /// Get Carbon Intensity data for current half hour for the specified country
+        /// </summary>
+        /// <param name="country"></param>
+        /// <returns><see cref="T:CountryIntensityData"/></returns>
+        public async Task<CountryIntensityData> GetCountryData(Country country)
+        {
+            var countryName = Enum.GetName(country)!;
+
+            var data = await facade.CallApi<ApiListDataResponse<CountryIntensityData>>($"regional/{countryName.ToLower()}");
+
+            data.Data.AssertHasSingleEntry();
+            data.Data[0].Intensities.AssertHasSingleEntry();
+
+            return data.Data[0];
         }
     }
 }

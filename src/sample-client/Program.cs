@@ -1,6 +1,6 @@
 ﻿using CarbonIntensitySdk;
+using CarbonIntensitySdk.Enums;
 using CarbonIntensitySdk.Integration;
-using CarbonIntensitySdk.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace sample_client
@@ -30,7 +30,7 @@ namespace sample_client
 
             //methods should be labelled as Async.
 
-            var regionalData = await client.GetRegionalData();
+            var regionalData = await client.GetCountryData(Country.Scotland);
         }
     }
 }
