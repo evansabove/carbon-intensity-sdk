@@ -5,5 +5,5 @@ namespace CarbonIntensitySdk.Models;
 public record RegionalIntensityData : TimeBoxedData
 {
     [JsonPropertyName("regions")]
-    public required RegionIntensity Regions { get; init; }
+    public required RegionIntensity[] Regions { get; init; }
 }
