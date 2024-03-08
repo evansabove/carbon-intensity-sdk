@@ -7,7 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "carbon-intensity-sdk", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "carbon-intensity-sdk.test", "tests\carbon-intensity-sdk.test\carbon-intensity-sdk.test.csproj", "{E184E634-3ACA-4C12-9D63-8B4963DC7A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-client", "src\sample-client\sample-client.csproj", "{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{91033E69-A766-41DB-A3DD-FEC8078B31AF}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +26,6 @@ Global
 		{E184E634-3ACA-4C12-9D63-8B4963DC7A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E184E634-3ACA-4C12-9D63-8B4963DC7A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E184E634-3ACA-4C12-9D63-8B4963DC7A24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD6DAB25-77B2-4FB0-916E-E64DD73F3537}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
