@@ -1,11 +1,9 @@
-﻿using CarbonIntensitySdk.Enums;
+﻿using CarbonIntensitySdk.Models;
 using CarbonIntensitySdk.Extensions;
-using CarbonIntensitySdk.Models;
-using System.Diagnostics.Metrics;
 
 namespace CarbonIntensitySdk
 {
-    public class CarbonIntensityClient(CarbonIntensityFacade facade)
+    public partial class CarbonIntensityClient(CarbonIntensityFacade facade)
     {
         /// <summary>
         /// Get Carbon Intensity data for current half hour
@@ -16,7 +14,7 @@ namespace CarbonIntensitySdk
             var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>("intensity");
 
             data.Data.AssertHasSingleEntry();
-            
+
             return data.Data[0];
         }
 
@@ -158,109 +156,6 @@ namespace CarbonIntensitySdk
         {
             var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityStatisticsData>>($"intensity/stats/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/{blockLengthHours}");
 
-            return data.Data;
-        }
-
-        /// <summary>
-        /// Get generation mix for current half hour
-        /// </summary>
-        /// <returns><see cref="T:GenerationMixData"/></returns>
-        public async Task<GenerationMixData> GetGenerationMix()
-        {
-            var data = await facade.CallApi<ApiDataResponse<GenerationMixData>>("generation");
-
-            return data.Data;
-        }
-
-        /// <summary>
-        /// Get generation mix for the past 24 hours
-        /// </summary>
-        /// <param name="before"></param>
-        /// <returns></returns>
-        public async Task<GenerationMixData[]> GetGenerationMix24HBefore(DateTime before)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<GenerationMixData>>($"generation/{before:yyyy-MM-ddTHH:mmZ}/pt24h");
-
-            return data.Data;
-        }
-
-        /// <summary>
-        /// Get generation mix between from and to datetimes
-        /// </summary>
-        /// <param name="from">Start Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z</param>
-        /// <param name="to">End datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z</param>
-        /// <returns><see cref="T:GenerationMixData[]"/></returns>
-        public async Task<GenerationMixData[]> GetGenerationMix(DateTime from, DateTime to)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<GenerationMixData>>($"generation/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
-
-            return data.Data;
-        }
-
-        /// <summary>
-        /// Get Carbon Intensity data for current half hour for GB regions
-        /// </summary>
-        /// <returns><see cref="T:RegionalIntensityData"/></returns>
-        public async Task<RegionalIntensityData[]> GetRegionalData()
-        {
-            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>("regional");
-
-            return data.Data;
-        }
-
-        /// <summary>
-        /// Get Carbon Intensity data for current half hour for the specified country
-        /// </summary>
-        /// <param name="country"></param>
-        /// <returns><see cref="T:CountryIntensityData"/></returns>
-        public async Task<CountryIntensityData> GetCountryData(Country country)
-        {
-            var region = country switch
-            {
-                Country.England => Region.England,
-                Country.Scotland => Region.Scotland,
-                Country.Wales => Region.Wales,
-                _ => throw new ArgumentOutOfRangeException(nameof(country), country, null)
-            };
-
-            return await GetRegionData(region);
-        }
-
-        public async Task<PostcodeIntensityData> GetPostcodeData(string postcode)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<PostcodeIntensityData>>($"regional/postcode/{postcode}");
-
-            data.Data.AssertHasSingleEntry();
-            data.Data[0].Intensities.AssertHasSingleEntry();
-
-            return data.Data[0];
-        }
-
-        public async Task<CountryIntensityData> GetRegionData(Region region)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<CountryIntensityData>>($"regional/regionid/{(int)region}");
-
-            data.Data.AssertHasSingleEntry();
-            data.Data[0].Intensities.AssertHasSingleEntry();
-
-            return data.Data[0];
-        }
-
-        public async Task<RegionalIntensityData[]> GetRegionalData(DateTime from, DateTime to)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
-            return data.Data;
-        }
-
-        public async Task<PostcodeIntensityData> GetRegionalData(DateTime from, DateTime to, string postcode)
-        {
-            var data = await facade.CallApi<ApiDataResponse<PostcodeIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/postcode/{postcode}");
-            return data.Data;
-        }
-
-        public async Task<CountryIntensityData> GetRegionalData(DateTime from, DateTime to, Region region)
-        {
-            var data = await facade.CallApi<ApiDataResponse<CountryIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/regionid/{(int)region}");
             return data.Data;
         }
     }
