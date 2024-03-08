@@ -30,7 +30,7 @@ namespace sample_client
 
             //methods should be labelled as Async.
 
-            var regionalData = await client.GetPostcodeData("S8");
+            var regionalData = await client.GetRegionalData(DateTime.Now, DateTime.Now.AddHours(12));
         }
     }
 }
