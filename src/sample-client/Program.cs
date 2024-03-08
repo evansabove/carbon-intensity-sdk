@@ -29,8 +29,6 @@ namespace sample_client
             //var averageIntensityBetween = await client.GetBlockAverageIntensityStatsBetween(DateTime.Now, DateTime.Now.AddHours(2), 2);
 
             //methods should be labelled as Async.
-
-            var regionalData = await client.GetRegionalData(DateTime.Now, DateTime.Now.AddHours(12));
         }
     }
 }
