@@ -11,7 +11,7 @@ An unofficial library for the [Carbon Intensity API](https://carbonintensity.org
 builder.Services.AddCarbonIntensitySdk();
 ```
 
-1. Inject the `CarbonIntensityClient` into your service or controller.
+3. Inject the `CarbonIntensityClient` into your service or controller.
 
 ### Original documentation
 The original documentation for the Carbon Intensity API can be found [here](https://carbon-intensity.github.io/api-definitions/#carbon-intensity-api-v2-0-0).
