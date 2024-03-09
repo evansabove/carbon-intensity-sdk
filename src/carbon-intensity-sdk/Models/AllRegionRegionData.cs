@@ -2,17 +2,20 @@
 
 namespace CarbonIntensitySdk.Models;
 
-public record CountryIntensityData
+public record AllRegionRegionData
 {
     [JsonPropertyName("regionid")]
     public required int RegionId { get; init; }
 
     [JsonPropertyName("dnoregion")]
-    public string? DnoRegion { get; init; }
+    public required string DnoRegion { get; init; }
 
     [JsonPropertyName("shortname")]
     public required string ShortName { get; init; }
 
-    [JsonPropertyName("data")]
-    public required CountryIntensity[] Intensities { get; init; }
+    [JsonPropertyName("intensity")]
+    public required CarbonIntensity Intensity { get; init; }
+
+    [JsonPropertyName("generationmix")]
+    public required GenerationMix[] GenerationMix { get; init; }
 }

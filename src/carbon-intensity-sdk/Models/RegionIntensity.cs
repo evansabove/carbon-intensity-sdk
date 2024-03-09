@@ -2,17 +2,8 @@
 
 namespace CarbonIntensitySdk.Models;
 
-public record RegionIntensity
+public record RegionIntensity : TimeBoxedData
 {
-    [JsonPropertyName("regionid")]
-    public required int RegionId { get; init; }
-
-    [JsonPropertyName("dnoregion")]
-    public required string DnoRegion { get; init; }
-
-    [JsonPropertyName("shortname")]
-    public required string ShortName { get; init; }
-
     [JsonPropertyName("intensity")]
     public required CarbonIntensity Intensity { get; init; }
 

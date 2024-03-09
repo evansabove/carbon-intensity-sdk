@@ -2,8 +2,8 @@
 
 namespace CarbonIntensitySdk.Models;
 
-public record RegionalIntensityData : TimeBoxedData
+public record AllRegionData : TimeBoxedData
 {
     [JsonPropertyName("regions")]
-    public required RegionIntensity[] Regions { get; init; }
+    public required AllRegionRegionData[] Regions { get; init; }
 }
