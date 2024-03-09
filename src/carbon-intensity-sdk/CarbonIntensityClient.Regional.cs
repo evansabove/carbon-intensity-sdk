@@ -17,6 +17,12 @@ namespace CarbonIntensitySdk
             return data.Data;
         }
 
+        public async Task<RegionalIntensityData[]> GetRegionalData(DateTime from, DateTime to)
+        {
+            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
+            return data.Data;
+        }
+
         /// <summary>
         /// Get Carbon Intensity data for current half hour for the specified country
         /// </summary>
@@ -45,6 +51,12 @@ namespace CarbonIntensitySdk
             return data.Data[0];
         }
 
+        public async Task<PostcodeIntensityData> GetPostcodeData(string postcode, DateTime from, DateTime to)
+        {
+            var data = await facade.CallApi<ApiDataResponse<PostcodeIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/postcode/{postcode}");
+            return data.Data;
+        }
+
         public async Task<CountryIntensityData> GetRegionData(Region region)
         {
             var data = await facade.CallApi<ApiListDataResponse<CountryIntensityData>>($"regional/regionid/{(int)region}");
@@ -55,19 +67,7 @@ namespace CarbonIntensitySdk
             return data.Data[0];
         }
 
-        public async Task<RegionalIntensityData[]> GetRegionalData(DateTime from, DateTime to)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
-            return data.Data;
-        }
-
-        public async Task<PostcodeIntensityData> GetRegionalData(DateTime from, DateTime to, string postcode)
-        {
-            var data = await facade.CallApi<ApiDataResponse<PostcodeIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/postcode/{postcode}");
-            return data.Data;
-        }
-
-        public async Task<CountryIntensityData> GetRegionalData(DateTime from, DateTime to, Region region)
+        public async Task<CountryIntensityData> GetRegionData(Region region, DateTime from, DateTime to)
         {
             var data = await facade.CallApi<ApiDataResponse<CountryIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/regionid/{(int)region}");
             return data.Data;
