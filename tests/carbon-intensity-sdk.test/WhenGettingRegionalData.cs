@@ -12,7 +12,7 @@ public class WhenGettingRegionalData : BaseTest
         var fixture = new Fixture();
         var client = fixture.Create<CarbonIntensityClient>();
 
-        _ = await client.GetRegionalData();
+        var x  = await client.GetAllRegionalData();
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class WhenGettingRegionalData : BaseTest
         var fixture = new Fixture();
         var client = fixture.Create<CarbonIntensityClient>();
 
-        _ = await client.GetRegionalData(DateTime.Today, DateTime.Today.AddHours(1));
+        _ = await client.GetAllRegionalData(DateTime.Today, DateTime.Today.AddHours(1));
     }
 
     [Fact]

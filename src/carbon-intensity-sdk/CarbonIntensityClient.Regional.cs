@@ -9,17 +9,17 @@ namespace CarbonIntensitySdk
         /// <summary>
         /// Get Carbon Intensity data for current half hour for GB regions
         /// </summary>
-        /// <returns><see cref="T:RegionalIntensityData"/></returns>
-        public async Task<RegionalIntensityData[]> GetRegionalData()
+        /// <returns><see cref="T:AllRegionData"/></returns>
+        public async Task<AllRegionData[]> GetAllRegionalData()
         {
-            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>("regional");
+            var data = await facade.CallApi<ApiListDataResponse<AllRegionData>>("regional");
 
             return data.Data;
         }
 
-        public async Task<RegionalIntensityData[]> GetRegionalData(DateTime from, DateTime to)
+        public async Task<AllRegionData[]> GetAllRegionalData(DateTime from, DateTime to)
         {
-            var data = await facade.CallApi<ApiListDataResponse<RegionalIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
+            var data = await facade.CallApi<ApiListDataResponse<AllRegionData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}");
             return data.Data;
         }
 
@@ -27,8 +27,8 @@ namespace CarbonIntensitySdk
         /// Get Carbon Intensity data for current half hour for the specified country
         /// </summary>
         /// <param name="country"></param>
-        /// <returns><see cref="T:CountryIntensityData"/></returns>
-        public async Task<CountryIntensityData> GetCountryData(Country country)
+        /// <returns><see cref="T:RegionIntensityData"/></returns>
+        public async Task<RegionIntensityData> GetCountryData(Country country)
         {
             var region = country switch
             {
@@ -57,9 +57,9 @@ namespace CarbonIntensitySdk
             return data.Data;
         }
 
-        public async Task<CountryIntensityData> GetRegionData(Region region)
+        public async Task<RegionIntensityData> GetRegionData(Region region)
         {
-            var data = await facade.CallApi<ApiListDataResponse<CountryIntensityData>>($"regional/regionid/{(int)region}");
+            var data = await facade.CallApi<ApiListDataResponse<RegionIntensityData>>($"regional/regionid/{(int)region}");
 
             data.Data.AssertHasSingleEntry();
             data.Data[0].Intensities.AssertHasSingleEntry();
@@ -67,9 +67,9 @@ namespace CarbonIntensitySdk
             return data.Data[0];
         }
 
-        public async Task<CountryIntensityData> GetRegionData(Region region, DateTime from, DateTime to)
+        public async Task<RegionIntensityData> GetRegionData(Region region, DateTime from, DateTime to)
         {
-            var data = await facade.CallApi<ApiDataResponse<CountryIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/regionid/{(int)region}");
+            var data = await facade.CallApi<ApiDataResponse<RegionIntensityData>>($"regional/intensity/{from:yyyy-MM-ddTHH:mmZ}/{to:yyyy-MM-ddTHH:mmZ}/regionid/{(int)region}");
             return data.Data;
         }
     }
