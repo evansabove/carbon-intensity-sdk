@@ -35,6 +35,12 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
 
     steps:
+    - name: debug
+      run: ls -l
+
+    - name: debug
+      run: pwd
+
     - name: Create package
       run: dotnet pack --output nupkgs --version-suffix ${GITHUB_REF#refs/tags/}
 
