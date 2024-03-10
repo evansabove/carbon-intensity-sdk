@@ -3,13 +3,13 @@ name: carbon-intensity-sdk
 on:
   push:
     branches: [ "main" ]
+    tags: [ "*" ]
   pull_request:
     types: [opened, reopened, synchronize]
     branches: [ "main" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
