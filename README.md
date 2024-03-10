@@ -2,6 +2,8 @@
 
 An unofficial library for the [Carbon Intensity API](https://carbonintensity.org.uk/) for use in C# applications.
 
+This package is still under development!
+
 ## Getting Started
 
 1. Install the package from NuGet
