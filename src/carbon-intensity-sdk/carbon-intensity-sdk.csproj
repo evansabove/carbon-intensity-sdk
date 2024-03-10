@@ -10,9 +10,10 @@
     <Description>An unofficial library for the Carbon Intensity API for use in C# application</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/evansabove/carbon-intensity-sdk</RepositoryUrl>
+    <PackageLicenseExpression>CC-BY-4.0</PackageLicenseExpression>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
