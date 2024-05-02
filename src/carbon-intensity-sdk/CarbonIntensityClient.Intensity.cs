@@ -19,41 +19,15 @@ namespace CarbonIntensitySdk
         }
 
         /// <summary>
-        /// Get Carbon Intensity data for today
-        /// </summary>
-        /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
-        public async Task<CarbonIntensityData[]> GetIntensitiesForToday()
-        {
-            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>("intensity/date");
-
-            return data.Data;
-        }
-
-        /// <summary>
         /// Get Carbon Intensity data for specific date
         /// </summary>
         /// <param name="date">Date in YYYY-MM-DD format e.g. 2017-08-25</param>
         /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
         public async Task<CarbonIntensityData[]> GetIntensitiesForDate(DateTime date)
         {
-            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}");
+            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}T00:00:00Z");
 
             return data.Data;
-        }
-
-        /// <summary>
-        /// Get Carbon Intensity data for a specific date and half hour settlement period
-        /// </summary>
-        /// <param name="date">Date in YYYY-MM-DD format e.g. 2017-08-25</param>
-        /// <param name="period">Half hour settlement period between 1-48 e.g. 42</param>
-        /// <returns><see cref="T:CarbonIntensityData"/></returns>
-        public async Task<CarbonIntensityData> GetIntensityForDateAndPeriod(DateTime date, int period)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}/{period}");
-
-            data.Data.AssertHasSingleEntry();
-
-            return data.Data[0];
         }
 
         /// <summary>

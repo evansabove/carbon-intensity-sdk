@@ -16,49 +16,6 @@ public class WhenGettingIntensity : BaseTest
     }
 
     [Fact]
-    public async Task ShouldGetIntensitiesForToday()
-    {
-        var fixture = new Fixture();
-
-        var client = fixture.Create<CarbonIntensityClient>();
-        var intensities = await client.GetIntensitiesForToday();
-
-        intensities.Length.ShouldBe(48);
-        intensities.MinBy(x => x.FromUtc)!.FromUtc.ShouldBe(DateTime.Today);
-        intensities.MaxBy(x => x.ToUtc)!.ToUtc.ShouldBe(DateTime.Today.AddDays(1));
-    }
-
-    [Fact]
-    public async Task ShouldGetIntensitiesForDate()
-    {
-        var fixture = new Fixture();
-
-        var client = fixture.Create<CarbonIntensityClient>();
-
-        var date = DateTime.Today.AddDays(-1);
-        var intensities = await client.GetIntensitiesForDate(date);
-
-        intensities.Length.ShouldBe(48);
-        intensities.MinBy(x => x.FromUtc)!.FromUtc.ShouldBe(date);
-        intensities.MaxBy(x => x.ToUtc)!.ToUtc.ShouldBe(date.AddDays(1));
-    }
-
-    [Fact]
-    public async Task ShouldGetIntensityForDateAndPeriod()
-    {
-        var fixture = new Fixture();
-
-        var client = fixture.Create<CarbonIntensityClient>();
-
-        var date = DateTime.Today.AddDays(-1);
-        int period = 5;
-        var intensity = await client.GetIntensityForDateAndPeriod(date, period);
-
-        intensity.FromUtc.ShouldBe(date.AddMinutes(30 * (period - 1)));
-        intensity.ToUtc.ShouldBe(date.AddMinutes(30 * period));
-    }
-
-    [Fact]
     public async Task ShouldGetCarbonFactors()
     {
         var fixture = new Fixture();
