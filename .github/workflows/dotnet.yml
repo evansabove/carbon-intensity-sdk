@@ -43,7 +43,7 @@ jobs:
       run: pwd
 
     - name: Create package
-      run: dotnet pack --output nupkgs --version-suffix ${GITHUB_REF#refs/tags/}
+      run: dotnet pack --output nupkgs
 
     - name: Publish package
       run: dotnet nuget push nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
