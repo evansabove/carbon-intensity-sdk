@@ -19,18 +19,6 @@ namespace CarbonIntensitySdk
         }
 
         /// <summary>
-        /// Get Carbon Intensity data for specific date
-        /// </summary>
-        /// <param name="date">Date in YYYY-MM-DD format e.g. 2017-08-25</param>
-        /// <returns><see cref="T:CarbonIntensityData[]"/></returns>
-        public async Task<CarbonIntensityData[]> GetIntensitiesForDate(DateTime date)
-        {
-            var data = await facade.CallApi<ApiListDataResponse<CarbonIntensityData>>($"intensity/date/{date:yyyy-MM-dd}T00:00:00Z");
-
-            return data.Data;
-        }
-
-        /// <summary>
         /// Get Carbon Intensity factors for each fuel type
         /// </summary>
         /// <returns><see cref="T:CarbonFactors"/></returns>
